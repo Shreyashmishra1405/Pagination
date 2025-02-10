@@ -8,7 +8,7 @@ function App() {
 
   const url = "https://dummyjson.com/products?limit=100";
   const ind=url.indexOf("?limit");
-  const perpageprod =10;
+  const perpageprod =12;
   const paginationLength = Math.ceil(url.slice(ind+7,url.length)/perpageprod);
   const startidx =currpage*perpageprod+1;
   const endidx=startidx+perpageprod;
