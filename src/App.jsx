@@ -23,6 +23,7 @@ function App() {
     const response = await fetch(url); // Replace with your API endpoint
     const data = await response.json();
     const { products } = data;
+    // console.log(products);
     setProducts(products);
   };
 

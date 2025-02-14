@@ -39,7 +39,7 @@ const DashBoard = ({
           </div>
         </Link>
       </div>
-      <div className="w-full flex flex-col py-8 bg-[#EDF4F2] justify-center">
+      <div className="w-full min-h-screen flex flex-col py-8 bg-[#EDF4F2] justify-start">
         <div className="grid  grid-cols-3 gap-6 p-8">
           {products.map((prod, ind) => {
             return (
@@ -50,6 +50,7 @@ const DashBoard = ({
                 <img
                   src={prod.images[0]}
                   alt="img.jpg"
+                  loading="lazy"
                   className="h-[200px] aspect-auto"
                 />
                 <div className="flex flex-col gap-4 font-semibold items-center">
