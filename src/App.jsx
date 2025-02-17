@@ -37,7 +37,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/products"
+            path="/"
             element={
               <DashBoard
                 products={products.slice(startidx, endidx)}
@@ -48,7 +48,7 @@ function App() {
               />
             }
           />
-          <Route path="/cart" element={<Cart cart={cart}/>}/>
+          <Route path="/cart" element={<Cart cart={cart} setcart={setcart}/>}/>
         </Routes>
       </BrowserRouter>
     </>

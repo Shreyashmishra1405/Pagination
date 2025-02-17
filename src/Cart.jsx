@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
-const Cart = ({ cart }) => {
+const Cart = ({ cart , setcart }) => {
   const [bill, setBill] = useState({
     Subtotal: 0,
     salestax: 0,
@@ -32,11 +32,19 @@ const Cart = ({ cart }) => {
     });
   }, [cart]);
 
+  const handleDelete = (id) => {
+    // setTimeout(()=>{
+    //   return <div className="absolute top-50 left-50 bg-black w-[50px] h-[50px] text-white">removing in 2secs</div>
+    // },2000)
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setcart(updatedCart);
+  };
+
   return (
     <>
       <div className="w-full flex justify-center font-semibold text-2xl p-6 cursor-pointer bg-whiteitems-center">
         Cart
-        <Link to={"/products"}>
+        <Link to={"/"}>
           <div className="absolute right-20 border-2 border-black rounded bg-black text-white active:bg-[#31473A]  active:text-white px-2 text-lg ">
             <span className="flex justify-center items-center gap-2 ">
               Go back to Products
@@ -44,11 +52,12 @@ const Cart = ({ cart }) => {
           </div>
         </Link>
       </div>
-      <div className="flex flex-row gap-2 justify-between w-full min-h-screen bg-[#EDF4F2]">
-        <div className=" w-2/3 flex flex-col p-8 gap-8  justify-start items-center">
+      {cart.length ? <div className="flex flex-row gap-2 justify-between w-full min-h-screen bg-[#EDF4F2]">
+        {/* cart */}
+        <div className="cart w-2/3 flex flex-col p-8 gap-8  justify-start items-center">
           {cart.map((prod) => {
             return (
-              <div className="w-full border-2  border-black  flex gap-8  cursor-pointer justify-around  items-center px-16 hover:bg-[#31473A] hover:text-white rounded-lg">
+              <div className=" relative w-full border-2  border-black  flex gap-8  cursor-pointer justify-around  items-center px-16 hover:bg-[#31473A] hover:text-white rounded-lg">
                 <div className="left max-w-[200px] flex justify-center p-4">
                   <img
                     src={prod.images[0]}
@@ -121,11 +130,27 @@ const Cart = ({ cart }) => {
                 <div className="right">
                   <h1 className="font-extrabold">${prod.price}</h1>
                 </div>
+                <span className="absolute bottom-4 right-4 active:fill-white">
+                  <svg
+                    id={prod.id}
+                    xmlns="http://www.w3.org/2000/svg"
+                    height={"1rem"}
+                    onClick={(e) => {
+                      handleDelete(prod.id);
+                    }}
+                    viewBox="0 0 448 512"
+                  >
+                    s
+                    <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                  </svg>
+                </span>
               </div>
             );
           })}
         </div>
-        { cart.length!==0 ?(<div className="bills w-1/3 flex flex-col  p-8 gap-8  justify-start items-center">
+        {/* bill */}
+        {cart.length !== 0 ? (
+          <div className=" bills w-1/3 flex flex-col  p-8 gap-8  justify-start items-center">
             <div className="flex flex-col gap-4 bg-[#31473A] text-white w-full rounded-2xl p-10 ">
               <span className="font-bold">Billing details</span>
               <span className="border w-full border-gray-300"></span>
@@ -158,11 +183,11 @@ const Cart = ({ cart }) => {
                 </button>
               </div>
             </div>
-          </div>)
-          :
-          ("No items to display")
-        }
-      </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div> : <div className="flex justify-center items-center">No items to display :(</div>}
     </>
   );
 };
