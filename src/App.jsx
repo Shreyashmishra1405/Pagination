@@ -20,7 +20,7 @@ function App() {
   const endidx = startidx + perpageprod;
 
   const getProducts = async () => {
-    const response = await fetch(url); // Replace with your API endpoint
+    const response = await fetch(url); 
     const data = await response.json();
     const { products } = data;
     // console.log(products);
